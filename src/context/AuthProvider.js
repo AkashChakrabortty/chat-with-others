@@ -1,7 +1,6 @@
 import {
   createUserWithEmailAndPassword,
-  getAuth,
-  GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signOut
+  getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
@@ -11,7 +10,6 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
-  const provider = new GoogleAuthProvider();
 
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
@@ -32,7 +30,7 @@ const AuthProvider = ({ children }) => {
           // const uid = user.uid;
           setUser(user);
         } else {
-          // console.log("else onAuthStateChanged");
+          console.log("else onAuthStateChanged");
           setUser();
         }
       });

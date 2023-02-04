@@ -1,11 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { userInfo } from '../../context/AuthProvider';
 
 const Login = () => {
-  
+   const { login } = useContext(userInfo);
+   const navigate = useNavigate();
+
+   const handleSubmit = (event) => {
+     event.preventDefault();
+     const email = event.target.email.value;
+     const password = event.target.password.value;
+
+     login(email, password).then(() => {
+       navigate('/device')
+     });
+   };
+
     return (
       <div className="flex h-screen items-center">
-        <form className="w-1/2 mx-auto border h-fit p-3">
+        <form
+          className="w-1/2 mx-auto border h-fit p-3"
+          onSubmit={handleSubmit}
+        >
           <h1 className="text-center font-bold text-xl">Login</h1>
           <div className="email text-center">
             <label htmlFor="">Enter Your Email:</label>
