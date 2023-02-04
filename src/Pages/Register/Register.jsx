@@ -16,7 +16,18 @@ const Register = () => {
      };
  createUser(email, password)
    .then((userCredential) => {
-    navigate('/device')
+     //store customer device info
+     fetch(`http://localhost:5000/storeDeviceInfo/${email}`, {
+       method: "POST",
+       headers: {
+         "content-type": "application/json",
+       },
+     })
+       .then((res) => res.json())
+       .then((data) => {
+         navigate("/device");
+       });
+   
    })
    .catch((error) => {
      const errorMessage = error.message;

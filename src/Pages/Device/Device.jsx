@@ -1,11 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { userInfo } from '../../context/AuthProvider';
 
 const Device = () => {
-   const { logout } = useContext(userInfo);
-
+   const { logout ,user} = useContext(userInfo);
+    const [devicesInfo, setDevicesInfo] = useState([]);
+useEffect(() => {
+  fetch(`http://localhost:5000/getDeviceInfo/${user.email}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data)
+      setDevicesInfo(data);
+    });
+}, [user]);
     const handleLogout = () => {
-      logout();
+      //delete customer device info
+      fetch(`http://localhost:5000/deleteDeviceInfo/${user.email}`, {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+            logout();
+        });
+    
     };
     
     return (
@@ -27,23 +46,13 @@ const Device = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Chrome</td>
-                <td>Windows 10</td>
-                <td>4/12/12</td>
+            {devicesInfo.map(deviceInfo => {return (
+              <tr key={deviceInfo._id}>
+                <td>{deviceInfo.browser}</td>
+                <td>{deviceInfo.os}</td>
+                <td>{deviceInfo.date}</td>
               </tr>
-
-              <tr>
-                <td>Chrome</td>
-                <td>Windows 10</td>
-                <td>4/12/12</td>
-              </tr>
-
-              <tr>
-                <td>Chrome</td>
-                <td>Windows 10</td>
-                <td>4/12/12</td>
-              </tr>
+            );})}
             </tbody>
           </table>
         </div>
