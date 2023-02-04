@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
+  
     return (
       <div className="flex h-screen items-center">
         <form className="w-1/2 mx-auto border h-fit p-3">

@@ -1,16 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { userInfo } from '../../context/AuthProvider';
 
 const Register = () => {
+ const { createUser } = useContext(userInfo);
+ const navigate = useNavigate();
+   const handleSubmit = (event) => {
+     event.preventDefault();
+     const email = event.target.email.value;
+     const password = event.target.password.value;
+
+     const userdb = {
+       email: email,
+       password: password,
+     };
+ createUser(email, password)
+   .then((userCredential) => {
+    navigate('/device')
+   })
+   .catch((error) => {
+     const errorMessage = error.message;
+     alert(errorMessage);
+   });
+   };
     return (
       <div className="flex h-screen items-center">
-        <form className="w-1/2 mx-auto border h-fit p-3">
+        <form
+          className="w-1/2 mx-auto border h-fit p-3"
+          onSubmit={handleSubmit}
+        >
           <h1 className="text-center font-bold text-xl">Register</h1>
-          <div className="name text-center">
-            <label htmlFor="">Enter Your Name:</label>
-            <br />
-            <input type="text" name="name" className="border" />
-          </div>
           <div className="email text-center">
             <label htmlFor="">Enter Your Email:</label>
             <br />

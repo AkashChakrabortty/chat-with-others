@@ -4,8 +4,8 @@ const Device = () => {
     return (
       <div className="flex h-screen items-center">
         <div className="w-10/12 mx-auto border h-fit p-3">
-          <table class="table-auto w-full text-center">
-            <thead className='border'>
+          <table className="table-auto w-full text-center">
+            <thead className="border">
               <tr>
                 <th>Browser</th>
                 <th>OS</th>
@@ -24,7 +24,7 @@ const Device = () => {
                   </button>
                 </td>
               </tr>
-             
+
               <tr>
                 <td>Chrome</td>
                 <td>Windows 10</td>
@@ -35,7 +35,7 @@ const Device = () => {
                   </button>
                 </td>
               </tr>
-             
+
               <tr>
                 <td>Chrome</td>
                 <td>Windows 10</td>
