@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { userInfo } from '../../context/AuthProvider';
 
 const Device = () => {
@@ -37,6 +38,9 @@ useEffect(() => {
           >
             Logout
           </button>
+          <Link className="border p-2 rounded" to="/chat">
+            Chat
+          </Link>
           <table className="table-auto w-full text-center">
             <thead className="border">
               <tr>
@@ -46,13 +50,15 @@ useEffect(() => {
               </tr>
             </thead>
             <tbody>
-            {devicesInfo.map(deviceInfo => {return (
-              <tr key={deviceInfo._id}>
-                <td>{deviceInfo.browser}</td>
-                <td>{deviceInfo.os}</td>
-                <td>{deviceInfo.date}</td>
-              </tr>
-            );})}
+              {devicesInfo.map((deviceInfo) => {
+                return (
+                  <tr key={deviceInfo._id}>
+                    <td>{deviceInfo.browser}</td>
+                    <td>{deviceInfo.os}</td>
+                    <td>{deviceInfo.date}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
